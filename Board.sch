@@ -683,6 +683,21 @@
 <smd name="7" x="3.81" y="-3.6525" dx="0.89" dy="3.06" layer="1"/>
 <smd name="8" x="0" y="3.6525" dx="5.35" dy="8.54" layer="1" cream="no"/>
 </package>
+<package name="USB-B1HSW6">
+<description>USB Header Footprint. Meant for On-Shore USB-B1HSW6 (http://www.on-shore.com/wp-content/uploads/USB-B1HSXX.pdf)</description>
+<pad name="M1" x="0" y="0" drill="2.3368"/>
+<pad name="M2" x="12.0142" y="-0.0254" drill="2.3368"/>
+<pad name="P$3" x="4.7752" y="2.7178" drill="0.9144" shape="square"/>
+<pad name="P$4" x="7.2644" y="2.7178" drill="0.9144" shape="square"/>
+<pad name="P$1" x="7.2644" y="4.7244" drill="0.9144" shape="square"/>
+<pad name="P$2" x="4.7752" y="4.7244" drill="0.9144" shape="square"/>
+<wire x1="0" y1="-10.3124" x2="12.0904" y2="-10.3124" width="0.1524" layer="21"/>
+<wire x1="0" y1="-10.16" x2="0" y2="-2.54" width="0.1524" layer="21"/>
+<wire x1="0" y1="2.54" x2="0" y2="6.35" width="0.1524" layer="21"/>
+<wire x1="12.0904" y1="-10.3378" x2="12.0904" y2="-2.5654" width="0.1524" layer="21"/>
+<wire x1="12.0904" y1="2.5146" x2="12.0904" y2="6.35" width="0.1524" layer="21"/>
+<wire x1="12.0904" y1="6.35" x2="0" y2="6.35" width="0.1524" layer="21"/>
+</package>
 </packages>
 <symbols>
 <symbol name="ATMEGA2560-16AU">
@@ -844,6 +859,20 @@
 <pin name="SYNC" x="-20.32" y="-2.54" length="middle" direction="in"/>
 <pin name="SS/TRK" x="20.32" y="2.54" length="middle" direction="pas" rot="R180"/>
 <pin name="AGND" x="20.32" y="-7.62" length="middle" direction="pwr" rot="R180"/>
+</symbol>
+<symbol name="USB_2.0_CONNECTOR">
+<wire x1="0" y1="0" x2="17.78" y2="0" width="0.1524" layer="94"/>
+<wire x1="17.78" y1="0" x2="17.78" y2="20.32" width="0.1524" layer="94"/>
+<wire x1="17.78" y1="20.32" x2="0" y2="20.32" width="0.1524" layer="94"/>
+<wire x1="0" y1="20.32" x2="0" y2="0" width="0.1524" layer="94"/>
+<pin name="USB_5V" x="-5.08" y="17.78" length="middle"/>
+<pin name="D+" x="-5.08" y="15.24" length="middle"/>
+<pin name="D-" x="-5.08" y="12.7" length="middle"/>
+<pin name="GND" x="-5.08" y="10.16" length="middle"/>
+<pin name="SHIELD2" x="-5.08" y="5.08" length="middle"/>
+<pin name="SHIELD" x="-5.08" y="2.54" length="middle"/>
+<text x="0" y="22.86" size="1.778" layer="95">&gt;NAME</text>
+<text x="0" y="-5.08" size="1.778" layer="96">&gt;VALUE</text>
 </symbol>
 </symbols>
 <devicesets>
@@ -1047,6 +1076,27 @@
 </device>
 </devices>
 </deviceset>
+<deviceset name="USB-B1HSW6">
+<description>http://www.on-shore.com/wp-content/uploads/USB-B1HSXX.pdf</description>
+<gates>
+<gate name="G$1" symbol="USB_2.0_CONNECTOR" x="-10.16" y="-7.62"/>
+</gates>
+<devices>
+<device name="" package="USB-B1HSW6">
+<connects>
+<connect gate="G$1" pin="D+" pad="P$3"/>
+<connect gate="G$1" pin="D-" pad="P$2"/>
+<connect gate="G$1" pin="GND" pad="P$4"/>
+<connect gate="G$1" pin="SHIELD" pad="M1"/>
+<connect gate="G$1" pin="SHIELD2" pad="M2"/>
+<connect gate="G$1" pin="USB_5V" pad="P$1"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
 </devicesets>
 </library>
 </libraries>
@@ -1060,13 +1110,15 @@
 </classes>
 <parts>
 <part name="U1" library="cartesian_main" deviceset="ATMEGA2560-16AU" device=""/>
-<part name="U2" library="cartesian_main" deviceset="DRV8825PWPR" device=""/>
-<part name="U3" library="cartesian_main" deviceset="DRV8825PWPR" device=""/>
-<part name="U4" library="cartesian_main" deviceset="DRV8825PWPR" device=""/>
 <part name="U5" library="cartesian_main" deviceset="LMZ22005TZ" device=""/>
+<part name="J$1" library="cartesian_main" deviceset="USB-B1HSW6" device=""/>
+<part name="U6" library="cartesian_main" deviceset="DRV8825PWPR" device=""/>
+<part name="U7" library="cartesian_main" deviceset="DRV8825PWPR" device=""/>
+<part name="U8" library="cartesian_main" deviceset="DRV8825PWPR" device=""/>
 </parts>
 <sheets>
 <sheet>
+<description>Control</description>
 <plain>
 </plain>
 <instances>
@@ -1074,17 +1126,9 @@
 <attribute name="NAME" x="-6.050809375" y="80.9995" size="2.08473125" layer="95" ratio="10" rot="SR0"/>
 <attribute name="VALUE" x="-5.287190625" y="-88.0013" size="2.08436875" layer="96" ratio="10" rot="SR0"/>
 </instance>
-<instance part="U2" gate="G$1" x="502.92" y="124.46" smashed="yes">
-<attribute name="NAME" x="487.632" y="172.8717" size="1.783590625" layer="95"/>
-<attribute name="VALUE" x="487.6492" y="71.0121" size="1.7816" layer="96"/>
-</instance>
-<instance part="U3" gate="G$1" x="502.92" y="7.62" smashed="yes">
-<attribute name="NAME" x="487.632" y="56.0317" size="1.783590625" layer="95"/>
-<attribute name="VALUE" x="487.6492" y="-45.8279" size="1.7816" layer="96"/>
-</instance>
-<instance part="U4" gate="G$1" x="502.92" y="-101.6" smashed="yes">
-<attribute name="NAME" x="487.632" y="-53.1883" size="1.783590625" layer="95"/>
-<attribute name="VALUE" x="487.6492" y="-155.0479" size="1.7816" layer="96"/>
+<instance part="J$1" gate="G$1" x="-35.56" y="101.6" smashed="yes">
+<attribute name="NAME" x="-35.56" y="122.682" size="1.778" layer="95"/>
+<attribute name="VALUE" x="-35.56" y="99.06" size="1.778" layer="96"/>
 </instance>
 </instances>
 <busses>
@@ -1093,12 +1137,36 @@
 </nets>
 </sheet>
 <sheet>
+<description>Power</description>
 <plain>
 </plain>
 <instances>
 <instance part="U5" gate="G$1" x="0" y="0" smashed="yes">
 <attribute name="VALUE" x="-15.2516" y="-13.3451" size="2.5487" layer="96"/>
 <attribute name="NAME" x="-15.2691" y="13.3605" size="2.553109375" layer="95"/>
+</instance>
+</instances>
+<busses>
+</busses>
+<nets>
+</nets>
+</sheet>
+<sheet>
+<description>Stepper Motor Drivers</description>
+<plain>
+</plain>
+<instances>
+<instance part="U6" gate="G$1" x="0" y="114.3" smashed="yes">
+<attribute name="NAME" x="-15.288" y="162.7117" size="1.783590625" layer="95"/>
+<attribute name="VALUE" x="-15.2708" y="60.8521" size="1.7816" layer="96"/>
+</instance>
+<instance part="U7" gate="G$1" x="0" y="-2.54" smashed="yes">
+<attribute name="NAME" x="-15.288" y="45.8717" size="1.783590625" layer="95"/>
+<attribute name="VALUE" x="-15.2708" y="-55.9879" size="1.7816" layer="96"/>
+</instance>
+<instance part="U8" gate="G$1" x="0" y="-111.76" smashed="yes">
+<attribute name="NAME" x="-15.288" y="-63.3483" size="1.783590625" layer="95"/>
+<attribute name="VALUE" x="-15.2708" y="-165.2079" size="1.7816" layer="96"/>
 </instance>
 </instances>
 <busses>
