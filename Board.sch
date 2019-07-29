@@ -698,6 +698,20 @@
 <wire x1="12.0904" y1="2.5146" x2="12.0904" y2="6.35" width="0.1524" layer="21"/>
 <wire x1="12.0904" y1="6.35" x2="0" y2="6.35" width="0.1524" layer="21"/>
 </package>
+<package name="WE_649004113322">
+<pad name="P$3" x="0" y="0" drill="0.6" diameter="1.4" shape="square"/>
+<pad name="P$4" x="4.2" y="0" drill="0.6" diameter="1.4" shape="square"/>
+<pad name="P$2" x="4.2" y="4.2" drill="0.6" diameter="1.4" shape="square"/>
+<pad name="P$1" x="0" y="4.2" drill="0.6" diameter="1.4" shape="square"/>
+<wire x1="-2.75" y1="-2.55" x2="-2.75" y2="-2.54" width="0.127" layer="21"/>
+<wire x1="-2.75" y1="-2.54" x2="-2.75" y2="7.05" width="0.127" layer="21"/>
+<wire x1="-2.75" y1="-2.54" x2="6.95" y2="-2.54" width="0.127" layer="21"/>
+<wire x1="6.95" y1="-2.54" x2="6.95" y2="7.05" width="0.127" layer="21"/>
+<wire x1="-2.75" y1="7.05" x2="6.95" y2="7.05" width="0.127" layer="21"/>
+<wire x1="0.635" y1="7.112" x2="0.635" y2="8.128" width="0.127" layer="21"/>
+<wire x1="0.635" y1="8.128" x2="3.429" y2="8.128" width="0.127" layer="21"/>
+<wire x1="3.429" y1="8.128" x2="3.429" y2="7.112" width="0.127" layer="21"/>
+</package>
 </packages>
 <symbols>
 <symbol name="ATMEGA2560-16AU">
@@ -873,6 +887,18 @@
 <pin name="SHIELD" x="-5.08" y="2.54" length="middle"/>
 <text x="0" y="22.86" size="1.778" layer="95">&gt;NAME</text>
 <text x="0" y="-5.08" size="1.778" layer="96">&gt;VALUE</text>
+</symbol>
+<symbol name="4PIN">
+<pin name="P$1" x="-15.24" y="7.62" length="middle"/>
+<pin name="P$2" x="-15.24" y="5.08" length="middle"/>
+<pin name="P$3" x="-15.24" y="2.54" length="middle"/>
+<pin name="P$4" x="-15.24" y="0" length="middle"/>
+<wire x1="-10.16" y1="10.16" x2="-10.16" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="-10.16" y1="-2.54" x2="2.54" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="2.54" y1="-2.54" x2="2.54" y2="10.16" width="0.254" layer="94"/>
+<wire x1="2.54" y1="10.16" x2="-10.16" y2="10.16" width="0.254" layer="94"/>
+<text x="-10.16" y="10.668" size="1.778" layer="95">&gt;NAME</text>
+<text x="-10.16" y="-5.08" size="1.778" layer="96">&gt;VALUE</text>
 </symbol>
 </symbols>
 <devicesets>
@@ -1097,6 +1123,24 @@
 </device>
 </devices>
 </deviceset>
+<deviceset name="WE_649004113322">
+<gates>
+<gate name="G$1" symbol="4PIN" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="WE_649004113322">
+<connects>
+<connect gate="G$1" pin="P$1" pad="P$1"/>
+<connect gate="G$1" pin="P$2" pad="P$2"/>
+<connect gate="G$1" pin="P$3" pad="P$3"/>
+<connect gate="G$1" pin="P$4" pad="P$4"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
 </devicesets>
 </library>
 </libraries>
@@ -1115,6 +1159,8 @@
 <part name="U6" library="cartesian_main" deviceset="DRV8825PWPR" device=""/>
 <part name="U7" library="cartesian_main" deviceset="DRV8825PWPR" device=""/>
 <part name="U8" library="cartesian_main" deviceset="DRV8825PWPR" device=""/>
+<part name="J$2" library="cartesian_main" deviceset="USB-B1HSW6" device=""/>
+<part name="U$1" library="cartesian_main" deviceset="WE_649004113322" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -1139,11 +1185,17 @@
 <sheet>
 <description>Power</description>
 <plain>
+<text x="-96.52" y="43.18" size="1.778" layer="91">POWER SWITCH</text>
+<text x="-91.44" y="5.08" size="1.778" layer="91">5V REG</text>
 </plain>
 <instances>
-<instance part="U5" gate="G$1" x="0" y="0" smashed="yes">
-<attribute name="VALUE" x="-15.2516" y="-13.3451" size="2.5487" layer="96"/>
-<attribute name="NAME" x="-15.2691" y="13.3605" size="2.553109375" layer="95"/>
+<instance part="U5" gate="G$1" x="-86.36" y="-12.7" smashed="yes">
+<attribute name="VALUE" x="-101.6116" y="-26.0451" size="2.5487" layer="96"/>
+<attribute name="NAME" x="-101.6291" y="0.6605" size="2.553109375" layer="95"/>
+</instance>
+<instance part="U$1" gate="G$1" x="-81.28" y="27.94" smashed="yes">
+<attribute name="NAME" x="-91.44" y="38.608" size="1.778" layer="95"/>
+<attribute name="VALUE" x="-91.44" y="22.86" size="1.778" layer="96"/>
 </instance>
 </instances>
 <busses>
@@ -1167,6 +1219,21 @@
 <instance part="U8" gate="G$1" x="0" y="-111.76" smashed="yes">
 <attribute name="NAME" x="-15.288" y="-63.3483" size="1.783590625" layer="95"/>
 <attribute name="VALUE" x="-15.2708" y="-165.2079" size="1.7816" layer="96"/>
+</instance>
+</instances>
+<busses>
+</busses>
+<nets>
+</nets>
+</sheet>
+<sheet>
+<description>Tool Passthrough</description>
+<plain>
+</plain>
+<instances>
+<instance part="J$2" gate="G$1" x="0" y="0" smashed="yes">
+<attribute name="NAME" x="0" y="21.082" size="1.778" layer="95"/>
+<attribute name="VALUE" x="0" y="-2.54" size="1.778" layer="96"/>
 </instance>
 </instances>
 <busses>
